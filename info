@@ -1,0 +1,69 @@
+docker-cli uses docker server to exec command
+docker uses a common os wheras heroku deployments creates a vm for a application
+image - app with its config and dependencies
+container - an instance of the image
+the app sends command to kernel from kernel space/network/other hardwares are allocated
+It creates sepereate segments in hard disk for an app this is done by either namespacing or controlgroups 
+This entire docker run on a linux virtual machine cause the namespacing and controlgrps used to create.....
+.... space in hdd is only available in linux .
+
+docker run image_name  
+docker ps && docker ps --all
+docker create image_name cmd && docker start container_id
+docker start container_id
+docker system prune , docker rm container_id
+docker logs container_id
+docker stop or docker kill container_id
+docker stop gives 10 sec to stop the process after 10 sec docker kill call is initiated
+docker exec -it container_id redis-cli
+docker run -it container sh
+All the dockers have their own hdd. A container cannot access the files in another container
+
+DockerFile - From Run cmd
+Docker build . - in the same folder where dockerfile is created
+A base image is something which has some predefined functions / commands so that it ease up the process
+When the build starts the base image is fetched and it creates an temp container and perform run command....
+....then it deletes the temp container then again when running it creates a temp container and deletes once its done...
+....finally its stored in a main container
+If the dockerfile hasnt changed then the build is stored in cache so if u build it again it builds faster.
+Every container has an id to get a string instead of id we can use docker build -t vikassuresh/name
+We can create an image from container using docker commit
+
+Creating a docker file to host a node server using docker
+use COPY to copy all files ... first copy package.json file
+Build the image and then run it along with port
+docker run -p 0010:8080 image_name here 0010 represents the system port and 8080 represents docker app port
+its better to copy things into /usr/app use - WORKDIR /usr/app
+
+Create a node project along with dockerfile 
+For  connecting A node app with another redis or some other app we can use docker-compose
+Docker compose is similar to docker-cli but instead of writing the code again and again this docker-compose..
+...helps in creating a file for automating the process , it also allow u to create multiple container
+services is  the place where u create containers
+we dont have to code anything specific once u place the containers inside services it automatically allows ...
+the containers to communicate we just have to pass the container name inside the code where we will be connecting
+
+docker-compose up -  to start
+docker-compose up - build rebuild
+docker-compose up -d to run in background
+docker-compose down to stop the process
+restart: "no",always,on-failure, unless-stopped  to restart the container on condition basis 
+docker-compose ps
+
+
+Create a docker file for react-app u can run differnt docker file name using docker build -f file-name .
+
+If u wanna new changes to reflect without rebuilding we can use volumes which instead of copying takes reference ....
+of the folders. docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app container_id
+Instead of using the above cmd everytime we can use docker-compose.yml to create volumes
+
+it uses build: 
+            context: .
+            dockerfile: Dockerfile.dev
+along with volumes:
+            -   /app/node_modules
+            - .:/app
+
+
+In order to use production version of react (npm run build version) we have to use some server in order to route...
+for that nginx is used
