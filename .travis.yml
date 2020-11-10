@@ -1,10 +1,9 @@
 sudo: required
-
 services: 
   - docker
 
-  before-install:
+before-install:
   - docker build -t react-app -f Dockerfile.dev .
 
-  script:
+script:
   - docker run react-app npm run test -- --coverage
