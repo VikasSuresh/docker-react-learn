@@ -95,4 +95,8 @@ and then save the api keys in travis env store
 use the key value created in travis env store in travis.yml
 and create  access_key_id: $AWS_ACCESS_KEY
             secret_access_key: $AWS_SECRET_KEY
+Expose Port in a dockerfile denotes that the app uses the corresponding port but in 
+beanstalk it automatically routes the app via that port
+
+In case if it throws any error use logs to find the errors .. it will be in eb-engine.log
 

@@ -1,4 +1,4 @@
-FROM node:10 AS builder
+FROM node:10
 
 WORKDIR '/app'
 
@@ -14,4 +14,4 @@ FROM nginx
 
 EXPOSE 80
 
-COPY --from=builder /app/build  /usr/share/nginx/html
+COPY --from=0 /app/build  /usr/share/nginx/html
