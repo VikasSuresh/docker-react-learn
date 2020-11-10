@@ -67,3 +67,33 @@ along with volumes:
 
 In order to use production version of react (npm run build version) we have to use some server in order to route...
 for that nginx is used
+
+Push it to git
+Sign-In in travis and install travis with git by using activate button in settings.
+After that create a .travis.yml file and write down the docker commands make sure there is no unwanted indentation..
+Push it to the git repo , travis automatically start a job for the pushed branch and check whether the tests...
+written in the travis file is working ..
+
+AWS -> login ->Elastic Bean stalk ->used for running one container
+Create a An application and follow the process to create a app with docker as platform
+the elastic bean stalk has a load balance which automatically scales up or down based on network traffic
+
+for the app to get deployed when u push the branch u have to write a piece of code in travis.yml
+need to add 
+    deploy:
+    provider:
+    region:
+    app:
+    env:
+    bucket_name:
+    bucket_path
+    on:
+        branch:master // this makes sure that only master branch is deployed to elastic bean stalk
+we have to create api keys which can be done from IAM in AWS 
+
+and then save the api keys in travis env store 
+use the key value created in travis env store in travis.yml
+and create  access_key_id: $AWS_ACCESS_KEY
+            secret_access_key:
+                secure:
+
