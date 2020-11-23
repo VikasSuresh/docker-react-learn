@@ -100,3 +100,6 @@ beanstalk it automatically routes the app via that port
 
 In case if it throws any error use logs to find the errors .. it will be in eb-engine.log
 
+Make sure We dont use as builder
+Make sure we use COPY "package*.json ./"the star denotes copy both package.json and lock.json  and in aws specify ./ 
+
