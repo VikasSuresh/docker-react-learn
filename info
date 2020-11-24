@@ -103,3 +103,15 @@ In case if it throws any error use logs to find the errors .. it will be in eb-e
 Make sure We dont use as builder
 Make sure we use COPY "package*.json ./"the star denotes copy both package.json and lock.json  and in aws specify ./ 
 
+Create a sepereate dockerfile.dev for all the folder for the app with postgress
+create docker-compose to access all postgress,redis and the api 
+after creating volumes use environment: to add env variables
+repeat the same process for all server client and worker
+nginx decide which route should be directed to react-app and which one to express
+the one denoted with /api is to make sure that it interacts with express app
+create a nginx default.conf file.
+dont name it as server in nginx cause its a reserved keyword
+create a dockerfile.dev for nginx and mention it as service in docker-compose
+We have to specify the pwd for postgress image and make sure that the nginx is wrapped....
+under a http
+

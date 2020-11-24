@@ -50,17 +50,17 @@ app.get('/curr',async(req,res)=>{
 })
 
 app.post('/',async(req,res)=>{
-    const i = parseInt(request.body.index);
+    const i = parseInt(req.body.index);
 
     if(i>40) return res.status(422).send('Index too high')
 
-    redisClient.hset('values',index,"NothingYet")
-    pub.publish('insert',index);
-    await client.query('INSERT INTO VALUES(number) VALUES($1)',[index])
+    redisClient.hset('values',i,"NothingYet")
+    pub.publish('insert',i);
+    await client.query('INSERT INTO VALUES(number) VALUES($1)',[i])
 
     res.status(200).send({success:true})   
 });
 
-app.listen(3000,()=>{
+app.listen(5000,()=>{
     console.log('App Started')
 })
