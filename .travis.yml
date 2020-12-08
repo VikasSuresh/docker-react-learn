@@ -1,0 +1,19 @@
+services:
+  - docker
+
+before_install:
+  - docker build -t react-app -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run react-app npm test -- --coverage
+
+after_install:
+  - docker build -t vikassuresh/multi-client ./client
+  - docker build -t vikassuresh/multi-nginx ./nginx
+  - docker build -t vikassuresh/multi-server ./server
+  - docker build -t vikassuresh/ multi-worker ./worker
+  - echo $DOCKER_PWD | docker login -u $DOCKER_ID --password-stdin
+  - docker push vikassuresh/multi-client
+  - docker push vikassuresh/multi-nginx
+  - docker push vikassuresh/multi-server
+  - docker push vikassuresh/ multi-worker
