@@ -7,7 +7,7 @@ before_install:
 script:
   - docker run react-app npm run test -- --coverage
 
-after_install:
+after_success:
   - docker build -t vikassuresh/multi-client ./client
   - docker build -t vikassuresh/multi-nginx ./nginx
   - docker build -t vikassuresh/multi-server ./server
