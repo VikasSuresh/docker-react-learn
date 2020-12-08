@@ -126,3 +126,4 @@ Create .travis.yml which creates run tests and push the prod version to docker H
 For pushing create env variables in travis
 And add - echo $DOCKER_PWD | docker login -u $DOCKER_ID --password-stdin in travis file
 and add docker push for all the images , commit and push it to git.
+after_install wont be working use after_success

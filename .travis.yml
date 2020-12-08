@@ -16,4 +16,4 @@ after_success:
   - docker push vikassuresh/multi-client
   - docker push vikassuresh/multi-nginx
   - docker push vikassuresh/multi-server
-  - docker push vikassuresh/ multi-worker
+  - docker push vikassuresh/multi-worker
