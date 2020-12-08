@@ -115,3 +115,14 @@ create a dockerfile.dev for nginx and mention it as service in docker-compose
 We have to specify the pwd for postgress image and make sure that the nginx is wrapped....
 under a http
 
+During Deploying Mutliple Container it follows the below process:
+Push -> Travis -> Travis Test -> Travis Prod ->Docker Hub -> EBS(Travis Pushes it to EBS) 
+Create DockerFile for everything except client
+In Client it uses two nginx one for routing and other for serving the react-scripts....
+...We can put together into a single nginx server ... But the motive is to expose react port...
+...so that the routing nginx can access react for that we have to write nginx.conf(which is inside client)...
+This nginx is then copied to the docker using DockerFile
+Create .travis.yml which creates run tests and push the prod version to docker Hub
+For pushing create env variables in travis
+And add - echo $DOCKER_PWD | docker login -u $DOCKER_ID --password-stdin in travis file
+and add docker push for all the images , commit and push it to git.
