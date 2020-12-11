@@ -152,3 +152,4 @@ After adding on pushing to github travis must push it to docker hub from there e
 for that we need to generate keys which can be done in IAM in aws
 write the same deploy code we did it inthe docker-travis-ebs in travis
 Make sure we place the secret key and access key inside travis
+The code will throw an error because memory for each and every container should be mentioned
