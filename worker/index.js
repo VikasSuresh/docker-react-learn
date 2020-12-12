@@ -1,20 +1,26 @@
-const redis = require("redis");
+var RedisClustr = require('redis-clustr');
+var RedisClient = require('redis');
 
-const redisClient = redis.createClient({
-    host:process.env.REDIS_HOST,
-    port:process.env.REDIS_PORT,
-    retry_strategy: () => 1000
-})
-
-const sub = redisClient.duplicate();
+var redisClient = new RedisClustr({
+    servers: [
+        {
+            host:process.env.REDIS_HOST,
+            port:process.env.REDIS_PORT,
+        }
+    ],
+    createClient: function (port, host) {
+        // this is the default behaviour
+        return RedisClient.createClient(port, host);
+    }
+});
 
 function fib(index){
     if(index<2) return 1;
     return fib(index-2) + fib(index-1)
 }
 
-sub.on('message',(channel,message)=>{
+redisClient.on('message',(channel,message)=>{
     redisClient.hset('values',message,(fib(parseInt(message))))
 })
 
-sub.subscribe('insert')
+redisClient.subscribe('insert')
