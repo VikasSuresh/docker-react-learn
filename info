@@ -153,3 +153,5 @@ for that we need to generate keys which can be done in IAM in aws
 write the same deploy code we did it inthe docker-travis-ebs in travis
 Make sure we place the secret key and access key inside travis
 The code will throw an error because memory for each and every container should be mentioned
+Check whether the required roles is there when u create a user in IAM
+If that doesnt fix then go to ecs in aws -> cluster -> tasks -> stopped -> find whats wrong
