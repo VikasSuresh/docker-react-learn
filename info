@@ -155,3 +155,42 @@ Make sure we place the secret key and access key inside travis
 The code will throw an error because memory for each and every container should be mentioned
 Check whether the required roles is there when u create a user in IAM
 If that doesnt fix then go to ecs in aws -> cluster -> tasks -> stopped -> find whats wrong
+
+Kubernetes
+We will be using kubectl for issuing cmd
+We have to create a deployment config which tells how to create and update instances of your application
+Kubectl uses the Kubernetes API to interact with the cluster
+kubectl get nodes and version
+kubectl create deployment name linktorepo
+kubectl get deployments
+A Pod is a group of one or more containers, with shared storage and network resources...
+and a specification for how to run the containers.
+Every Kubernetes Node runs at least:
+    Kubelet, a process responsible for communication between the Kubernetes Master and the Node; ...
+        it manages the Pods and the containers running on a machine.
+    A container runtime (like Docker) responsible for pulling the container image from a registry,...
+         unpacking the container, and running the application.
+kubectl get - list resources - kubectl get pods
+kubectl describe - show detailed information about a resource - kubectl describe pods
+kubectl logs - print the logs from a container in a pod - kubectl logs $POD_NAME
+kubectl exec - execute a command on a container in a pod - kubectl exec $POD_NAME env
+service is used to expose the node/container etc
+label is like a nickname to the deployment
+kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+kubectl delete service -l run=kubernetes-bootcamp
+Scaling when kubectlg get deployments is used we get some fields:
+    NAME lists the names of the Deployments in the cluster.
+    READY shows the ratio of CURRENT/DESIRED replicas
+    UP-TO-DATE displays the number of replicas that have been updated to achieve the desired state.
+    AVAILABLE displays how many replicas of the application are available to your users.
+    AGE displays the amount of time that the application has been running.
+Here Desired is the no of replicas user defined whike creating a deployment and the current ...
+is the one which is running
+kubectl scale deployments/kubernetes-bootcamp --replicas=4
+for scaling down use kubectl scale and change --replicas=2 eg: kubectl scale deployments/kubernetes-bootcamp --replicas=2
+Upadting:
+    kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+    checking whether it has been updated:
+        kubectl rollout status deployments/kubernetes-bootcamp
+
+
