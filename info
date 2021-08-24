@@ -3,9 +3,9 @@ docker uses a common os wheras heroku deployments creates a vm for a application
 image - app with its config and dependencies
 container - an instance of the image
 the app sends command to kernel from kernel space/network/other hardwares are allocated
-It creates sepereate segments in hard disk for an app this is done by either namespacing or controlgroups 
+It creates sepereate segments in hard disk for an app this is done by namespacing and the resources are restricted by controlgroups 
 This entire docker run on a linux virtual machine cause the namespacing and controlgrps used to create.....
-.... space in hdd is only available in linux .
+.... and restrict resource space in hdd is only available in linux .
 
 docker run image_name  
 docker ps && docker ps --all
