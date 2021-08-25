@@ -48,7 +48,7 @@ docker-compose up - build rebuild
 docker-compose up -d to run in background
 docker-compose down to stop the process
 restart: "no",always,on-failure, unless-stopped  to restart the container on condition basis 
-docker-compose ps
+docker-compose ps to be runned from the directory which has a docker-compose.yml file
 
 
 Create a docker file for react-app u can run differnt docker file name using docker build -f file-name .
@@ -64,6 +64,15 @@ along with volumes:
             -   /app/node_modules
             - .:/app
 
+We can replace a default command for runnint test by adding command inside a service container after volumes
+like :
+    build: 
+        context: .
+        dockerfile: Dockerfile.dev
+    volumes:
+        -   /app/node_modules
+        - .:/app
+    command: ["npm","run","test"]
 
 In order to use production version of react (npm run build version) we have to use some server in order to route...
 for that nginx is used
@@ -155,5 +164,4 @@ Make sure we place the secret key and access key inside travis
 The code will throw an error because memory for each and every container should be mentioned
 Check whether the required roles is there when u create a user in IAM
 If that doesnt fix then go to ecs in aws -> cluster -> tasks -> stopped -> find whats wrong
-
 
